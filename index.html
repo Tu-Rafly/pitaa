@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday Rahayu Puspita Sari</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-blue: #1e88e5;
+            --light-blue: #64b5f6;
+            --soft-blue: #bbdefb;
+            --white: #ffffff;
+            --light-gray: #f5f5f5;
+            --accent-yellow: #ffd54f;
+            --accent-pink: #f06292;
+            --text-dark: #263238;
+            --text-light: #607d8b;
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--light-gray);
+            color: var(--text-dark);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        .scrapbook-container {
+            width: 100%;
+            max-width: 800px;
+            background-color: var(--white);
+            border-radius: 20px;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.08);
+            overflow: hidden;
+            margin: 20px;
+            position: relative;
+            border: 1px solid var(--soft-blue);
+        }
+        
+        .story-viewer {
+            position: relative;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 70vh;
+        }
+        
+        .story-container {
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto;
+            text-align: center;
+            display: none;
+        }
+        
+        .story-container.active {
+            display: block;
+        }
+        
+        .special-photo-container {
+            position: relative;
+            width: 100%;
+            margin: 20px 0;
+        }
+        
+        .special-photo {
+            width: 250px;
+            height: 250px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 5px solid var(--white);
+            box-shadow: 0 0 0 5px var(--accent-yellow),
+                        0 0 30px rgba(0,0,0,0.2);
+            margin: 0 auto;
+            position: relative;
+            z-index: 10;
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+        
+        .photo-confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: var(--accent-pink);
+            border-radius: 50%;
+            animation: confetti-fall 5s linear infinite;
+            z-index: 5;
+        }
+        
+        @keyframes confetti-fall {
+            0% {
+                transform: translateY(-100px) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(300px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+        
+        .story-text {
+            font-size: 1.3rem;
+            font-weight: 500;
+            margin-bottom: 30px;
+            padding: 0 20px;
+            color: var(--text-dark);
+        }
+        
+        .gradient-text {
+            font-weight: 600;
+            background: linear-gradient(45deg, var(--primary-blue), var(--light-blue));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        /* Cake Animation Styles */
+        .cake-section {
+            text-align: center;
+            margin: 40px 0;
+            padding: 20px;
+            background-color: var(--white);
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(100, 181, 246, 0.2);
+            border: 1px solid var(--soft-blue);
+        }
+        
+        .cake {
+            position: relative;
+            width: 200px;
+            height: 200px;
+            margin: 0 auto;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .cake:hover {
+            transform: scale(1.05);
+        }
+        
+        .cake-base {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 70px;
+            background: linear-gradient(to right, var(--primary-blue), var(--light-blue));
+            border-radius: 10px 10px 5px 5px;
+            box-shadow: inset 0 -3px 5px rgba(0,0,0,0.1);
+        }
+        
+        .cake-middle {
+            position: absolute;
+            bottom: 70px;
+            width: 80%;
+            height: 60px;
+            left: 10%;
+            background: linear-gradient(to right, var(--light-blue), var(--soft-blue));
+            border-radius: 10px 10px 5px 5px;
+            box-shadow: inset 0 -3px 5px rgba(0,0,0,0.1);
+        }
+        
+        .cake-top {
+            position: absolute;
+            bottom: 130px;
+            width: 60%;
+            height: 50px;
+            left: 20%;
+            background-color: var(--soft-blue);
+            border-radius: 10px 10px 5px 5px;
+            box-shadow: inset 0 -3px 5px rgba(0,0,0,0.1);
+        }
+        
+        .candle {
+            position: absolute;
+            bottom: 180px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 10px;
+            height: 30px;
+            background-color: var(--white);
+            border-radius: 5px;
+            box-shadow: 0 0 5px rgba(0,0,0,0.1);
+        }
+        
+        .flame {
+            position: absolute;
+            bottom: 210px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 16px;
+            height: 20px;
+            background: linear-gradient(to bottom, var(--accent-yellow), #ffa000);
+            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+            animation: flicker 0.6s infinite alternate;
+            box-shadow: 0 0 10px var(--accent-yellow);
+        }
+        
+        @keyframes flicker {
+            0% { transform: translateX(-50%) scale(1); opacity: 1; }
+            50% { transform: translateX(-50%) scale(1.1) rotate(5deg); opacity: 0.9; }
+            100% { transform: translateX(-50%) scale(1.05); opacity: 0.8; }
+        }
+        
+        #birthday-wish {
+            font-size: 1.3rem;
+            color: var(--primary-blue);
+            opacity: 0;
+            transition: opacity 0.8s ease, transform 0.8s ease;
+            margin-top: 25px;
+            font-weight: 600;
+            transform: translateY(10px);
+        }
+        
+        /* Navigation */
+        .navigation-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 30px;
+        }
+        
+        .nav-button {
+            background: linear-gradient(to right, var(--primary-blue), var(--light-blue));
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(30, 136, 229, 0.3);
+            transition: all 0.3s;
+            min-width: 120px;
+            text-align: center;
+        }
+        
+        .nav-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(30, 136, 229, 0.4);
+        }
+        
+        .nav-button.secondary {
+            background: linear-gradient(to right, var(--text-light), #90a4ae);
+            box-shadow: 0 4px 15px rgba(144, 164, 174, 0.3);
+        }
+        
+        /* Animations */
+        .heart-animation {
+            position: absolute;
+            font-size: 24px;
+            opacity: 0;
+            pointer-events: none;
+            z-index: 100;
+            color: var(--accent-pink);
+            text-shadow: 0 0 5px rgba(255,255,255,0.8);
+        }
+        
+        .confetti {
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            background-color: var(--primary-blue);
+            opacity: 0;
+            z-index: 90;
+            border-radius: 50%;
+        }
+        
+        .music-note {
+            position: absolute;
+            font-size: 22px;
+            opacity: 0;
+            animation: floatNote 3s linear forwards;
+            z-index: 100;
+            color: var(--accent-yellow);
+        }
+        
+        @keyframes floatNote {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-120px) rotate(20deg);
+                opacity: 0;
+            }
+        }
+        
+        .photo-note {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            font-size: 0.8rem;
+            color: var(--text-light);
+            font-style: italic;
+            opacity: 0.7;
+            background-color: rgba(255,255,255,0.7);
+            padding: 4px 8px;
+            border-radius: 4px;
+        }
+        
+        /* Responsive Adjustments */
+        @media (max-width: 600px) {
+            .story-viewer {
+                padding: 20px 15px;
+            }
+            
+            .story-text {
+                font-size: 1.1rem;
+                padding: 0 10px;
+            }
+            
+            .special-photo {
+                width: 200px;
+                height: 200px;
+            }
+            
+            .nav-button {
+                padding: 10px 20px;
+                font-size: 0.95rem;
+                min-width: 100px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="scrapbook-container">
+        <div class="story-viewer">
+            <!-- slide 1 -->
+            <div class="story-container active" id="story1">
+                <p class="story-text">Happy Birthday To <span class="gradient-text"> The Special One</span> That Borns On May With <span class="gradient-text"> The Gemini Or Cancer Sign</span></p>
+                <div class="navigation-buttons">
+                    <button class="nav-button" id="nextBtn1">Continue</button>
+                </div>
+            </div>
+
+            <!-- Story 2 dengan Cake Animation -->
+            <div class="story-container" id="story2">
+                <div class="cake-section">
+                    <div class="cake" id="birthday-cake">
+                        <div class="cake-base"></div>
+                        <div class="cake-middle"></div>
+                        <div class="cake-top"></div>
+                        <div class="candle"></div>
+                        <div class="flame"></div>
+                    </div>
+                    <div id="birthday-wish">Make a wish and blow the candle!</div>
+                </div>
+                <div class="photo-note">
+                    Klik lilinya
+                </div>
+                <div class="navigation-buttons">
+                    <button class="nav-button secondary" id="prevBtn2">Back</button>
+                    <button class="nav-button" id="nextBtn2">Next</button>
+                </div>
+            </div>
+            
+            <!-- Story 3 -->
+            <div class="story-container" id="story3">
+                <p class="story-text">I Hope On <span class="gradient-text">Your Day</span> It Will Be <span class="gradient-text">Greatfull</span></p>
+                <div class="navigation-buttons">
+                    <button class="nav-button secondary" id="prevBtn3">Back</button>
+                    <button class="nav-button" id="nextBtn3">Next</button>
+                </div>
+            </div>
+            
+            <!-- Story 4 - Final -->
+            <div class="story-container" id="story4">
+                <p class="story-text"> And Will <span class="gradient-text">Always Be Happy</span> In The Days To Come</p>
+                <div class="navigation-buttons">
+                    <button class="nav-button secondary" id="prevBtn4">Back</button>
+                    <button class="nav-button" id="surpriseBtn">Next!</button>
+                </div>
+            </div>
+            
+            <!-- Surprise Element -->
+            <div class="story-container" id="surprise">
+                <div class="special-photo-container">
+                    <img src="https://i.imgur.com/rFuflsh.jpeg" alt="Birthday Person" class="special-photo">
+                    <!-- Confetti will be added here by JavaScript -->
+                </div>
+                <h2 class="story-text"><span class="gradient-text"></span></h2>
+                <p class="story-text">Happy Birthday<span class="gradient-text"> Pitaa</span>🫶🏻💙🎉</p>
+                
+                <div class="photo-note">
+                    Maaf ya fotonya cuma ada itu
+                </div>
+                
+                <div class="navigation-buttons">
+                    <button class="nav-button secondary" id="prevBtn5">Back</button>
+                    <button class="nav-button" id="restartBtn">Start Over</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Daftar semua story
+        const stories = ['story1', 'story2', 'story3', 'story4', 'surprise'];
+        let currentStory = 1;
+        
+        // Fungsi navigasi
+        function navigateTo(storyNumber) {
+            // Sembunyikan semua story
+            stories.forEach(story => {
+                document.getElementById(story).classList.remove('active');
+            });
+            
+            // Tampilkan story yang dipilih
+            document.getElementById(stories[storyNumber-1]).classList.add('active');
+            currentStory = storyNumber;
+            
+            // Penanganan khusus untuk story cake
+            if (storyNumber === 2) {
+                document.getElementById('birthday-wish').style.opacity = '1';
+                document.getElementById('birthday-wish').style.transform = 'translateY(0)';
+            }
+        }
+        
+        // Event listeners untuk tombol navigasi
+        document.getElementById('nextBtn1').addEventListener('click', () => navigateTo(2));
+        document.getElementById('nextBtn2').addEventListener('click', () => navigateTo(3));
+        document.getElementById('nextBtn3').addEventListener('click', () => navigateTo(4));
+        document.getElementById('surpriseBtn').addEventListener('click', () => {
+            createHearts();
+            createConfetti();
+            createMusicNotes();
+            createPhotoConfetti();
+            navigateTo(5);
+        });
+        document.getElementById('restartBtn').addEventListener('click', () => navigateTo(1));
+        
+        // Tombol back
+        document.getElementById('prevBtn2').addEventListener('click', () => navigateTo(1));
+        document.getElementById('prevBtn3').addEventListener('click', () => navigateTo(2));
+        document.getElementById('prevBtn4').addEventListener('click', () => navigateTo(3));
+        document.getElementById('prevBtn5').addEventListener('click', () => navigateTo(4));
+        
+        // Cake interaction
+        document.getElementById('birthday-cake').addEventListener('click', function() {
+            const flame = document.querySelector('.flame');
+            const wish = document.getElementById('birthday-wish');
+            
+            // Matikan lilin
+            flame.style.display = 'none';
+            wish.textContent = "Your wish will come true! 💫";
+            
+            // Buat animasi confetti
+            createConfetti();
+            
+            // Reset animasi setelah 2 detik
+            setTimeout(() => {
+                wish.style.opacity = '0';
+                wish.style.transform = 'translateY(10px)';
+                setTimeout(() => {
+                    wish.textContent = "Make a wish and blow the candle!";
+                    wish.style.opacity = '1';
+                    wish.style.transform = 'translateY(0)';
+                    flame.style.display = 'block';
+                }, 1000);
+            }, 2000);
+        });
+        
+        // Heart animation
+        function createHearts() {
+            const heartColors = ['#f06292', '#ff8a65', '#ffd54f', '#4fc3f7'];
+            
+            for (let i = 0; i < 25; i++) {
+                setTimeout(() => {
+                    const heart = document.createElement('div');
+                    heart.className = 'heart-animation';
+                    heart.innerHTML = '❤️';
+                    heart.style.left = Math.random() * 100 + 'vw';
+                    heart.style.top = Math.random() * 100 + 'vh';
+                    heart.style.fontSize = Math.random() * 30 + 20 + 'px';
+                    heart.style.color = heartColors[Math.floor(Math.random() * heartColors.length)];
+                    document.body.appendChild(heart);
+                    
+                    // Animation
+                    heart.animate([
+                        { transform: 'scale(0) translateY(0)', opacity: 0 },
+                        { transform: 'scale(1.2) translateY(-20px)', opacity: 1 },
+                        { transform: 'scale(0.8) translateY(-40px)', opacity: 0 }
+                    ], {
+                        duration: 2000,
+                        easing: 'ease-out'
+                    });
+                    
+                    setTimeout(() => heart.remove(), 2000);
+                }, i * 80);
+            }
+        }
+        
+        // Confetti animation
+        function createConfetti() {
+            const colors = ['#1e88e5', '#64b5f6', '#bbdefb', '#ffd54f', '#f06292', '#ffffff'];
+            
+            for (let i = 0; i < 150; i++) {
+                setTimeout(() => {
+                    const confetti = document.createElement('div');
+                    confetti.className = 'confetti';
+                    confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                    confetti.style.left = Math.random() * 100 + 'vw';
+                    confetti.style.top = -10 + 'px';
+                    confetti.style.width = Math.random() * 12 + 5 + 'px';
+                    confetti.style.height = Math.random() * 12 + 5 + 'px';
+                    
+                    // Random shapes
+                    if (Math.random() > 0.5) {
+                        confetti.style.borderRadius = '50%';
+                    } else {
+                        confetti.style.borderRadius = '0';
+                    }
+                    
+                    document.body.appendChild(confetti);
+                    
+                    const animationDuration = Math.random() * 3 + 2;
+                    
+                    confetti.animate([
+                        { top: '-10px', opacity: 0, transform: 'rotate(0deg)' },
+                        { top: Math.random() * 100 + 'vh', opacity: 1, transform: 'rotate(180deg)' },
+                        { top: Math.random() * 100 + 100 + 'vh', opacity: 0, transform: 'rotate(360deg)' }
+                    ], {
+                        duration: animationDuration * 1000,
+                        easing: 'cubic-bezier(0.1, 0.8, 0.3, 1)'
+                    });
+                    
+                    setTimeout(() => confetti.remove(), animationDuration * 1000);
+                }, i * 20);
+            }
+        }
+        
+        // Music notes animation
+        function createMusicNotes() {
+            const notes = ['♪', '♫', '♩', '♬', '♭', '♮'];
+            const noteColors = ['#ffd54f', '#f06292', '#4fc3f7', '#aed581'];
+            
+            for (let i = 0; i < 20; i++) {
+                setTimeout(() => {
+                    const note = document.createElement('div');
+                    note.className = 'music-note';
+                    note.textContent = notes[Math.floor(Math.random() * notes.length)];
+                    note.style.left = Math.random() * 100 + 'vw';
+                    note.style.top = '80vh';
+                    note.style.color = noteColors[Math.floor(Math.random() * noteColors.length)];
+                    note.style.fontSize = Math.random() * 20 + 18 + 'px';
+                    document.body.appendChild(note);
+                    
+                    setTimeout(() => note.remove(), 3000);
+                }, i * 150);
+            }
+        }
+        
+        // Photo confetti animation
+        function createPhotoConfetti() {
+            const container = document.querySelector('.special-photo-container');
+            const colors = ['#f06292', '#ffd54f', '#4fc3f7', '#aed581', '#ff8a65'];
+            
+            // Clear existing confetti
+            const existingConfetti = document.querySelectorAll('.photo-confetti');
+            existingConfetti.forEach(confetti => confetti.remove());
+            
+            for (let i = 0; i < 50; i++) {
+                const confetti = document.createElement('div');
+                confetti.className = 'photo-confetti';
+                confetti.style.left = Math.random() * 100 + '%';
+                confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                confetti.style.width = Math.random() * 10 + 5 + 'px';
+                confetti.style.height = confetti.style.width;
+                confetti.style.animationDelay = Math.random() * 2 + 's';
+                confetti.style.animationDuration = Math.random() * 3 + 2 + 's';
+                container.appendChild(confetti);
+            }
+        }
+    </script>
+</body>
+</html>
